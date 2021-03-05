@@ -63,7 +63,7 @@ for(i in 1:1000) {
   lista_conts[i] <- cont
 }
 
-lista_conts_preco <- sapply(lista_conts, function(x) x*2)
+lista_conts_preco <- sapply(lista_conts, function(x) x*preco)
 
 
 mean(lista_conts_preco)
@@ -77,3 +77,41 @@ mean(lista_conts_preco)
 
 dnorm(2000, mean(lista_conts_preco), sd(lista_conts_preco))
 ```
+
+
+
+**c)**  Qual é a probabilidade de que, ao completar o álbum, o colecionadar tenha 5 figurinhas repetidas da primeira figurinha do albúm (desconsiderando a que colou no álbum).
+
+
+ *- Espaço Amostral:*
+
+\[ \Omega = \{ (x_1,...,x_n): x_i \subset figurinhas, i = {1,..,n} \} \]
+
+
+$A$ = {Dado que o album foi completado, encontrar 5 figurinhas repetidas da primeira figurinha} 
+
+
+
+ figurinha 1 = 6
+ 
+ figurinha 2 até 533 = n - 533 - 6
+ 
+ 
+ \[\frac{(533 - 1)^{n - (533 - 6)}}{533^{n-533}} \]
+
+
+```{r}
+evento.a <- function(n) {
+  
+  (533 - 1)**(n-(533+6))/(533^(n-533))
+}
+
+evento.a(mean(lista_conts))
+
+
+
+```
+
+
+
+
