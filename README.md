@@ -1,2 +1,2 @@
-# ce-2
+# Computação em Estatística 2
 Resolução das listas de Computação em Estatística 2
