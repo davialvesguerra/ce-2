@@ -1,0 +1,79 @@
+---
+title: "Lista 1"
+author: "Davi Guerra"
+output:
+  html_document:
+    df_print: paged
+---
+```{r echo=F, include=F}
+
+library(tidyverse)
+
+```
+
+
+### Questão 1
+
+**Simulando computacionalmente o preenchimento de um álbum de figurinhas.**
+
+
+Suponha que há um álbum com 533 figurinhas diferentes. Cada pacote com 5 figurinhas custa 2 reais. Supondo que as figurinhas são distribuídas aleatóriamente nos pacotes (e portanto os pacotes são independentes entre si e a probabilidade de cada figurinha ser selecionada é a mesma), queremos estudar a distribuição do gasto necessário para completar o álbum (considere que não haja troca de figurinhas repetidas.).
+
+
+**a)** Qual é o gasto esperado para se preencher o álbum?
+
+```{r}
+
+
+
+pacote <- 5
+preco <- 2
+
+
+lista_conts <- c()
+
+for(i in 1:1000) {
+  
+  album <- sapply(1:533, function(x) 0)
+  
+  cheio <-  F
+  
+  cont <- 0
+  
+  while(cheio == F){
+  
+    cont <- cont + 1
+     
+    
+    figurinhas <- sample(1:533, pacote, replace = T)
+    
+    for(fig in figurinhas){
+      album[fig] <- album[fig] + 1
+    }
+      
+    
+    
+    if(0 %in% album) { cheio <- F }
+    
+    else{ cheio <- T }
+    
+ 
+  }
+  
+  lista_conts[i] <- cont
+}
+
+lista_conts_preco <- sapply(lista_conts, function(x) x*2)
+
+
+mean(lista_conts_preco)
+
+
+
+
+```
+```{r}
+
+
+dnorm(2000, mean(lista_conts_preco), sd(lista_conts_preco))
+```
